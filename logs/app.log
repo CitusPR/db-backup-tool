@@ -1,0 +1,36 @@
+2026-02-14 10:15:44,452 - INFO - Backup gestartet
+2026-02-14 10:17:15,073 - INFO - Backup gestartet
+2026-02-14 10:17:15,081 - INFO - Backup Datei erstellt: backups\backup_2026-02-14_10-17-15.txt
+2026-02-14 10:20:01,902 - INFO - Backup gestartet
+2026-02-14 10:20:01,903 - INFO - Backup Datei erstellt: backups\backup_2026-02-14_10-20-01.txt
+2026-02-14 10:20:01,920 - INFO - Backup ZIP erstellt: backups\backup_2026-02-14_10-20-01.zip
+2026-02-14 10:20:02,006 - INFO - Backup gestartet
+2026-02-14 10:20:02,007 - INFO - Backup Datei erstellt: backups\backup_2026-02-14_10-20-02.txt
+2026-02-14 10:20:02,008 - INFO - Backup ZIP erstellt: backups\backup_2026-02-14_10-20-02.zip
+2026-02-14 10:25:40,323 - INFO - Backup gestartet
+2026-02-14 10:25:40,331 - INFO - TXT erstellt: backups\backup_2026-02-14_10-25-40.txt
+2026-02-14 10:25:40,360 - INFO - ZIP erstellt: backups\backup_2026-02-14_10-25-40.zip
+2026-02-14 10:26:20,307 - INFO - Restore durchgeführt von backups\backup_2026-02-14_10-25-40.zip
+2026-02-14 10:36:48,369 - INFO - Backup gestartet (type=full)
+2026-02-14 10:36:48,409 - INFO - Backup ZIP erstellt: backups\backup_full_2026-02-14_10-36-48.zip
+2026-02-14 10:36:59,942 - INFO - Backup gestartet (type=incremental)
+2026-02-14 10:36:59,954 - INFO - Backup ZIP erstellt: backups\backup_incremental_2026-02-14_10-36-59.zip
+2026-02-14 10:38:23,318 - INFO - Backup gestartet (type=full, storage=local)
+2026-02-14 10:38:23,360 - INFO - Backup ZIP erstellt: backups\backup_full_2026-02-14_10-38-23.zip
+2026-02-14 10:38:30,808 - INFO - Backup gestartet (type=incremental, storage=cloud)
+2026-02-14 10:38:30,820 - INFO - Backup ZIP erstellt: cloud_storage\backup_incremental_2026-02-14_10-38-30.zip
+2026-02-14 10:39:49,970 - INFO - Backup gestartet (type=full, storage=local)
+2026-02-14 10:39:50,008 - INFO - Backup ZIP erstellt: backups\backup_full_2026-02-14_10-39-49.zip
+2026-02-14 10:39:57,354 - INFO - Backup gestartet (type=incremental, storage=cloud)
+2026-02-14 10:39:57,356 - INFO - Backup ZIP erstellt: cloud_storage\backup_incremental_2026-02-14_10-39-57.zip
+2026-02-14 10:40:10,223 - INFO - Restore durchgeführt von cloud_storage\backup_incremental_2026-02-14_10-39-57.zip
+2026-02-14 10:43:21,139 - INFO - Backup START (type=full, storage=local)
+2026-02-14 10:43:21,180 - INFO - Backup SUCCESS (0.04s) -> backups\backup_full_2026-02-14_10-43-21.zip
+2026-02-14 10:43:29,988 - INFO - Backup START (type=incremental, storage=cloud)
+2026-02-14 10:43:29,990 - INFO - Backup SUCCESS (0.0s) -> cloud_storage\backup_incremental_2026-02-14_10-43-29.zip
+2026-02-14 10:43:48,704 - INFO - Restore START (storage=cloud, file=None)
+2026-02-14 10:43:48,714 - INFO - Restore SUCCESS (0.01s) <- cloud_storage\backup_incremental_2026-02-14_10-43-29.zip
+2026-02-14 10:53:41,099 - INFO - Backup START (type=full, storage=local)
+2026-02-14 10:53:41,114 - INFO - Backup SUCCESS (0.02s) -> backups\backup_full_2026-02-14_10-53-41.zip
+2026-02-14 10:53:43,937 - INFO - Restore START (storage=local, file=None)
+2026-02-14 10:53:43,940 - INFO - Restore SUCCESS (0.0s) <- backups\backup_incremental_2026-02-14_10-36-59.zip

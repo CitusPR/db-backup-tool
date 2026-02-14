@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DBBackup Web UI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="header card">
+      <div>
+        <h1 class="title">DBBackup</h1>
+        <p class="subtitle">Backup & Restore – lokal oder “cloud” (Simulation), inkl. Logs</p>
+      </div>
+      <span class="badge">Flask UI • CLI Core</span>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2 style="margin:0 0 10px;">Backup</h2>
+        <form class="row" action="/backup" method="post">
+          <div>
+            <label>Typ</label><br>
+            <select name="type">
+              <option value="full">full</option>
+              <option value="incremental">incremental</option>
+              <option value="differential">differential</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Storage</label><br>
+            <select name="storage">
+              <option value="local">local</option>
+              <option value="cloud">cloud</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Backup starten</button>
+        </form>
+
+        <div style="margin-top:14px;">
+          <h3 style="margin:0 0 8px;">Letzte Aktion</h3>
+          <div class="code">{{ last_action or "—" }}</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 style="margin:0 0 10px;">Restore</h2>
+        <form class="row" action="/restore" method="post">
+          <div>
+            <label>Storage</label><br>
+            <select name="storage">
+              <option value="local">local</option>
+              <option value="cloud">cloud</option>
+            </select>
+          </div>
+
+          <button class="btn btn-secondary" type="submit">Restore (latest)</button>
+          <a class="btn btn-ghost" href="/refresh">Refresh</a>
+        </form>
+
+        <p class="subtitle" style="margin-top:12px;">
+          Restore entpackt das letzte ZIP nach <span class="code">restore/</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin:0 0 10px;">Backups</h2>
+      <ul class="list">
+        {% for b in backups %}
+          <li class="item">
+            <div>
+              <div class="code">{{ b.name }}</div>
+              <small>{{ b.storage }}</small>
+            </div>
+            <small>{{ b.size_kb }} KB</small>
+          </li>
+        {% else %}
+          <li class="item"><small>Keine Backups gefunden.</small></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
