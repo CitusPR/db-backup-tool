@@ -6,83 +6,135 @@
   <title>DBBackup Web UI</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-  <div class="container">
-    <div class="header card">
-      <div>
-        <h1 class="title">DBBackup</h1>
-        <p class="subtitle">Backup & Restore – lokal oder “cloud” (Simulation), inkl. Logs</p>
-      </div>
-      <span class="badge">Flask UI • CLI Core</span>
-    </div>
 
-    <div class="grid">
+<body>
+  <div class="bg-glow"></div>
+
+  <main class="container">
+    <header class="topbar card">
+      <div class="brand">
+        <div class="logo">
+          <span class="dot"></span>
+          <span class="dot dot2"></span>
+        </div>
+        <div>
+          <h1 class="title">DBBackup</h1>
+          <p class="subtitle">Backup & Restore – local oder cloud (Simulation) • ZIP • Logs</p>
+        </div>
+      </div>
+
+      <div class="meta">
+        <span class="badge">Python</span>
+        <span class="badge">Flask</span>
+        <span class="badge">CLI Core</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <!-- BACKUP -->
       <div class="card">
-        <h2 style="margin:0 0 10px;">Backup</h2>
-        <form class="row" action="/backup" method="post">
-          <div>
-            <label>Typ</label><br>
-            <select name="type">
+        <div class="card-head">
+          <h2>Backup</h2>
+          <p>Erstellt ein ZIP-Backup mit Typ & Storage.</p>
+        </div>
+
+        <form class="form" action="/backup" method="post">
+          <div class="field">
+            <label for="type">Typ</label>
+            <select id="type" name="type">
               <option value="full">full</option>
               <option value="incremental">incremental</option>
               <option value="differential">differential</option>
             </select>
           </div>
 
-          <div>
-            <label>Storage</label><br>
-            <select name="storage">
+          <div class="field">
+            <label for="storage">Storage</label>
+            <select id="storage" name="storage">
               <option value="local">local</option>
               <option value="cloud">cloud</option>
             </select>
           </div>
 
-          <button class="btn btn-primary" type="submit">Backup starten</button>
+          <button class="btn btn-primary" type="submit">
+            <span class="btn-ico">⬤</span>
+            Backup starten
+          </button>
         </form>
 
-        <div style="margin-top:14px;">
-          <h3 style="margin:0 0 8px;">Letzte Aktion</h3>
-          <div class="code">{{ last_action or "—" }}</div>
+        <div class="status">
+          <div class="status-label">Letzte Aktion</div>
+          <div class="status-value">{{ last_action or "—" }}</div>
         </div>
       </div>
 
+      <!-- RESTORE -->
       <div class="card">
-        <h2 style="margin:0 0 10px;">Restore</h2>
-        <form class="row" action="/restore" method="post">
-          <div>
-            <label>Storage</label><br>
-            <select name="storage">
+        <div class="card-head">
+          <h2>Restore</h2>
+          <p>Entpackt das letzte ZIP nach <span class="mono">restore/</span>.</p>
+        </div>
+
+        <form class="form" action="/restore" method="post">
+          <div class="field">
+            <label for="restoreStorage">Storage</label>
+            <select id="restoreStorage" name="storage">
               <option value="local">local</option>
               <option value="cloud">cloud</option>
             </select>
           </div>
 
-          <button class="btn btn-secondary" type="submit">Restore (latest)</button>
+          <button class="btn btn-secondary" type="submit">
+            <span class="btn-ico">⬤</span>
+            Restore (latest)
+          </button>
+
           <a class="btn btn-ghost" href="/refresh">Refresh</a>
         </form>
 
-        <p class="subtitle" style="margin-top:12px;">
-          Restore entpackt das letzte ZIP nach <span class="code">restore/</span>
-        </p>
+        <div class="hint">
+          Tipp: Nutze <span class="mono">list</span> im CLI, um Dateinamen zu sehen.
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="card">
-      <h2 style="margin:0 0 10px;">Backups</h2>
-      <ul class="list">
+    <!-- BACKUPS LIST -->
+    <section class="card">
+      <div class="card-head row-between">
+        <div>
+          <h2>Backups</h2>
+          <p>Alle ZIPs aus local + cloud (Simulation).</p>
+        </div>
+        <div class="pill">Total: {{ backups|length }}</div>
+      </div>
+
+      <div class="table">
+        <div class="thead">
+          <div>Datei</div>
+          <div>Storage</div>
+          <div class="right">Größe</div>
+        </div>
+
         {% for b in backups %}
-          <li class="item">
+          <div class="trow">
+            <div class="file mono">{{ b.name }}</div>
             <div>
-              <div class="code">{{ b.name }}</div>
-              <small>{{ b.storage }}</small>
+              <span class="tag {{ 'tag-cloud' if b.storage == 'cloud' else 'tag-local' }}">
+                {{ b.storage }}
+              </span>
             </div>
-            <small>{{ b.size_kb }} KB</small>
-          </li>
+            <div class="right">{{ b.size_kb }} KB</div>
+          </div>
         {% else %}
-          <li class="item"><small>Keine Backups gefunden.</small></li>
+          <div class="empty">Keine Backups gefunden.</div>
         {% endfor %}
-      </ul>
-    </div>
-  </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span class="muted">DBBackup • Portfolio UI</span>
+      <span class="muted">© {{ 2026 }}</span>
+    </footer>
+  </main>
 </body>
 </html>
